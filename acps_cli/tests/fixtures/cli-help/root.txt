@@ -1,0 +1,8 @@
+Usage: acps-cli [OPTIONS] COMMAND [ARGS]...
+ACPs unified command line interface.
+admin     Administrative and control-plane commands.
+agent     Manage Agent drafts and review lifecycle.
+auth      User authentication commands.
+cert      Manage certificate lifecycle operations.
+discover  Run discovery queries and health checks.
+entity    Manage derived entities.

@@ -1,0 +1,93 @@
+{
+  "aic": "",
+  "active": true,
+  "lastModifiedTime": "",
+  "protocolVersion": "02.02",
+  "name": "癌症组织切片淋巴结转移预测智能体",
+  "description": "接受分割透明图，预测淋巴结转移风险，返回逐图结果列表、汇总 CSV 及文本摘要。",
+  "version": "1.0.0",
+  "iconUrl": "",
+  "documentationUrl": "",
+  "webAppUrl": "",
+  "provider": {
+    "countryCode": "<CountryCode>",
+    "organization": "<Organization>",
+    "department": "<Department>",
+    "url": "",
+    "license": "",
+    "name": "<Name>",
+    "email": "<Email>",
+    "domainRegistrations": []
+  },
+  "visibility": "public",
+  "securitySchemes": {
+    "mtls": {
+      "type": "mutualTLS",
+      "description": "智能体间 mTLS 双向认证"
+    }
+  },
+  "endPoints": [
+    {
+      "url": "amqps://wt.ioa.pub:5671/acps?inbox=inbox_{AIC}",
+      "transport": "AMQP",
+      "security": [
+        { "mtls": [] }
+      ]
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": [
+      "rabbitmq:>=4.2"
+    ]
+  },
+  "defaultInputModes": [
+    "image/png",
+    "image/jpeg",
+    "image/tiff",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json",
+    "text/csv"
+  ],
+  "skills": [
+    {
+      "id": "wsi.lymph.predict",
+      "name": "淋巴结转移预测",
+      "description": "接受分割透明图，预测淋巴结转移风险，返回 results 列表、aggregate_csv、summary_text。",
+      "version": "1.0.1",
+      "tags": [
+        "病理",
+        "淋巴结",
+        "转移预测"
+      ],
+      "examples": [
+        "根据分割透明图预测淋巴结转移风险"
+      ],
+      "inputModes": [
+        "image/png",
+        "image/jpeg",
+        "image/tiff",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json",
+        "text/csv"
+      ],
+      "visibility": "public"
+    }
+  ],
+  "entityUserId": "",
+  "entityMeta": {},
+  "certificate": {
+    "altNames": {
+      "dns": [],
+      "ip": []
+    },
+    "requestedValidity": 49
+  }
+}

@@ -1,0 +1,7 @@
+Usage: acps-cli admin [OPTIONS] COMMAND [ARGS]...
+Administrative and control-plane commands.
+auth       Registry administrator authentication commands.
+ca         CA administration commands.
+discovery  Discovery administration and DSP control commands.
+mq         mq-auth-server
+registry   Registry administration commands.

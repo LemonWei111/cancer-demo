@@ -1,0 +1,11 @@
+Usage: acps-cli cert [OPTIONS] COMMAND [ARGS]...
+Manage certificate lifecycle operations.
+account-key   Manage ACME account keys.
+crl           Inspect certificate revocation lists.
+eab           Manage external account binding credentials.
+issue         Request a new certificate for an Agent.
+ocsp          Inspect OCSP status endpoints.
+renew         Renew an existing certificate.
+revoke        Revoke a certificate.
+status        Query certificate status for an Agent.
+trust-bundle  Manage trust bundle files.

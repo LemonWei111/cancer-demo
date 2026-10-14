@@ -1,0 +1,96 @@
+{
+  "aic": "",
+  "active": true,
+  "lastModifiedTime": "",
+  "protocolVersion": "02.02",
+  "name": "癌症组织切片分割智能体",
+  "description": "接受病理切片图像，分割肿瘤区域并输出轮廓图与透明叠加图（base64 随消息回传）。",
+  "version": "1.0.0",
+  "iconUrl": "",
+  "documentationUrl": "",
+  "webAppUrl": "",
+  "provider": {
+    "countryCode": "<CountryCode>",
+    "organization": "<Organization>",
+    "department": "<Department>",
+    "url": "",
+    "license": "",
+    "name": "<Name>",
+    "email": "<Email>",
+    "domainRegistrations": []
+  },
+  "visibility": "public",
+  "securitySchemes": {
+    "mtls": {
+      "type": "mutualTLS",
+      "description": "智能体间 mTLS 双向认证"
+    }
+  },
+  "endPoints": [
+    {
+      "url": "amqps://wt.ioa.pub:5671/acps?inbox=inbox_{AIC}",
+      "transport": "AMQP",
+      "security": [
+        { "mtls": [] }
+      ]
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": [
+      "rabbitmq:>=4.2"
+    ]
+  },
+  "defaultInputModes": [
+    "image/png",
+    "image/jpeg",
+    "image/tiff",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json",
+    "image/png",
+    "image/jpeg"
+  ],
+  "skills": [
+    {
+      "id": "wsi.segment",
+      "name": "肿瘤区域分割",
+      "description": "接受病理切片图像，输出肿瘤区域轮廓图与透明叠加图（PNG），以及结构化摘要。",
+      "version": "1.0.1",
+      "tags": [
+        "病理",
+        "切片",
+        "肿瘤分割",
+        "WSI"
+      ],
+      "examples": [
+        "对这张切片进行肿瘤区域分割"
+      ],
+      "inputModes": [
+        "image/png",
+        "image/jpeg",
+        "image/tiff",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json",
+        "image/png",
+        "image/jpeg"
+      ],
+      "visibility": "public"
+    }
+  ],
+  "entityUserId": "",
+  "entityMeta": {},
+  "certificate": {
+    "altNames": {
+      "dns": [],
+      "ip": []
+    },
+    "requestedValidity": 49
+  }
+}

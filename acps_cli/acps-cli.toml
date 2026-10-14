@@ -1,0 +1,63 @@
+# acps-cli 统一配置文件
+# 登录用户名/密码建议通过命令行选项提供；若未提供，CLI 会交互式提示输入
+
+[registry]
+# Registry 服务根地址
+base_url = "https://wt.ioa.pub/registry-server"
+# 可选：auth login 在 auto-register 时使用的默认显示名称与组织名
+# display_name = "Demo Client"
+# org_name = "ACPS Demo"
+# `9002` 本体证书 mTLS 平面入口
+mtls_base_url = "http://wt.ioa.pub:9002"
+# 本体 mTLS 证书材料目录（默认 ./ .registry-client/ontology-mtls）
+# ontology_mtls_materials_dir = "./.registry-client/ontology-mtls"
+# 校验 `9002` 服务端证书的 CA 文件（客户端侧配置，仅在 HTTPS/mTLS 直连场景需要）
+# 这和 registry-server 的 `REGISTRY_SERVER_MTLS_CA_CERT_FILE` 不是一回事：后者是 `9002` 服务端用来校验
+# “客户端证书链”的 trust anchor，这里则是 CLI 用来校验 `9002` “服务端证书链”的 CA 文件。
+# 本地联调通常填写 `root-ca.crt`，或包含该 root 的 trust bundle；不要把只含 intermediate `ca.crt` 的文件
+# 误当成 `9002` 服务端校验配置与服务端 listener 配置的通用替代物。
+# mtls_server_ca_file = "./certs/registry-mtls-ca.pem"
+# 请求超时秒数（默认 15）
+# timeout_seconds = 15
+
+[auth]
+# 普通用户与管理员 token 文件物理分离
+user_token_file = "./.acps-cli/tokens/registry-user.json"
+admin_token_file = "./.acps-cli/tokens/registry-admin.json"
+
+[ca]
+# CA 服务地址（必填）
+base_url = "https://wt.ioa.pub/ca-server"
+# 各 AIC 的 ACME account key 存放目录（默认 ./keyfiles/accounts）
+# account_keys_dir = "./keyfiles/accounts"
+# 其他目录配置（默认如下）
+# private_keys_dir = "./keyfiles/private"
+# certs_dir = "./keyfiles/certs"
+# csr_dir = "./keyfiles/csr"
+# trust_bundle_path = "./keyfiles/trust-bundle.pem"
+
+[discovery]
+# Discovery 服务地址
+base_url = "https://wt.ioa.pub/discovery"
+
+[mq]
+# Group API 地址（mTLS，端口 9007）
+group_api_url = "https://wt.ioa.pub:9007"
+# Auth API 地址（mTLS，端口 9008）
+auth_api_url = "https://wt.ioa.pub:9008"
+
+# group 子命令：Leader 专属客户端证书（CN 必须等于路径中的 leader_aic）
+# 若留空，group 子命令必须通过 --cert-file / --key-file 显式指定
+# group_cert_file = "./keyfiles/certs/<LEADER_AIC>.crt"
+# group_key_file  = "./keyfiles/private/<LEADER_AIC>.key"
+
+# health / auth-probe 探测用客户端证书（任意合法 ACPs 证书均可）
+# 若留空，回退到 [ca].certs_dir / [ca].private_keys_dir 按 AIC 自动推导路径
+# probe_cert_file = "./keyfiles/certs/<ANY_AIC>.crt"
+# probe_key_file  = "./keyfiles/private/<ANY_AIC>.key"
+
+# 校验 mq-auth-server 服务端证书的 CA 文件
+# ca_cert_file = "./certs/acps-root-ca.pem"
+
+# 请求超时（秒，默认 10）
+# timeout_seconds = 10

@@ -1,0 +1,6 @@
+opencv-python
+opencv_python_headless
+numpy
+yacs
+Pillow
+PyYAML

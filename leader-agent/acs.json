@@ -1,0 +1,105 @@
+{
+  "aic": "",
+  "active": true,
+  "lastModifiedTime": "",
+  "protocolVersion": "02.02",
+  "name": "病理切片多智能体协调分析智能体",
+  "description": "接受病理切片分析请求，协调乳腺/结肠癌预测、肿瘤区域分割、淋巴结转移预测等专业智能体，完成多智能体协作分析并生成病理诊断报告。支持文本、JSON及图片格式的输入输出。",
+  "version": "1.0.0",
+  "iconUrl": "",
+  "documentationUrl": "",
+  "webAppUrl": "",
+  "provider": {
+    "countryCode": "<CountryCode>",
+    "organization": "<Organization>",
+    "department": "<Department>",
+    "url": "",
+    "license": "",
+    "name": "<Name>",
+    "email": "<Email>",
+    "domainRegistrations": []
+  },
+  "visibility": "public",
+  "securitySchemes": {
+    "mtls": {
+      "type": "mutualTLS",
+      "description": "智能体间 mTLS 双向认证"
+    }
+  },
+  "endPoints": [
+    {
+      "url": "amqps://wt.ioa.pub:5671/acps?inbox=inbox_{AIC}",
+      "transport": "AMQP",
+      "security": [
+        { "mtls": [] }
+      ]
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": [
+      "rabbitmq:>=4.2"
+    ]
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json",
+    "image/png",
+    "image/jpeg",
+    "image/tiff"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json",
+    "text/markdown",
+    "image/png",
+    "image/jpeg"
+  ],
+  "skills": [
+    {
+      "id": "wsi-analysis.tissue-coordination",
+      "name": "病理切片多智能体协调分析",
+      "description": "接受病理切片分析请求，根据组织类型协调乳腺/结肠癌预测智能体、肿瘤区域分割智能体、淋巴结转移预测智能体，完成多智能体协作分析并返回文本报告与分割结果图像。",
+      "version": "1.0.1",
+      "tags": [
+        "病理",
+        "切片分析",
+        "乳腺癌",
+        "结肠癌",
+        "肿瘤分割",
+        "淋巴结转移",
+        "多智能体协调"
+      ],
+      "examples": [
+        "帮我分析这张乳腺切片",
+        "这张结肠切片有没有癌变",
+        "分析这张切片并给出诊断建议"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json",
+        "image/png",
+        "image/jpeg",
+        "image/tiff"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json",
+        "text/markdown",
+        "image/png",
+        "image/jpeg"
+      ],
+      "visibility": "public"
+    }
+  ],
+  "entityUserId": "",
+  "entityMeta": {},
+  "certificate": {
+    "altNames": {
+      "dns": [],
+      "ip": []
+    },
+    "requestedValidity": 49
+  }
+}

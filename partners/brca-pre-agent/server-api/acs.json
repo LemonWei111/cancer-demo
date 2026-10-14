@@ -1,0 +1,92 @@
+{
+  "aic": "",
+  "active": true,
+  "lastModifiedTime": "",
+  "protocolVersion": "02.02",
+  "name": "乳腺组织切片预测智能体",
+  "description": "接受乳腺病理切片图像，判断是否存在癌变，返回预测标签、置信度及结构化 JSON 结果。",
+  "version": "1.0.0",
+  "iconUrl": "",
+  "documentationUrl": "",
+  "webAppUrl": "",
+  "provider": {
+    "countryCode": "<CountryCode>",
+    "organization": "<Organization>",
+    "department": "<Department>",
+    "url": "",
+    "license": "",
+    "name": "<Name>",
+    "email": "<Email>",
+    "domainRegistrations": []
+  },
+  "visibility": "public",
+  "securitySchemes": {
+    "mtls": {
+      "type": "mutualTLS",
+      "description": "智能体间 mTLS 双向认证"
+    }
+  },
+  "endPoints": [
+    {
+      "url": "amqps://wt.ioa.pub:5671/acps?inbox=inbox_{AIC}",
+      "transport": "AMQP",
+      "security": [
+        { "mtls": [] }
+      ]
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": [
+      "rabbitmq:>=4.2"
+    ]
+  },
+  "defaultInputModes": [
+    "image/png",
+    "image/jpeg",
+    "image/tiff",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "wsi.breast.predict",
+      "name": "乳腺癌切片预测",
+      "description": "接受乳腺 WSI/切片图像（base64 或 FileDataItem），输出 prediction（0=恶性/1=良性）、label、confidence。",
+      "version": "1.0.1",
+      "tags": [
+        "病理",
+        "乳腺",
+        "乳腺癌",
+        "切片预测"
+      ],
+      "examples": [
+        "预测这张乳腺切片是否癌变"
+      ],
+      "inputModes": [
+        "image/png",
+        "image/jpeg",
+        "image/tiff",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "visibility": "public"
+    }
+  ],
+  "entityUserId": "",
+  "entityMeta": {},
+  "certificate": {
+    "altNames": {
+      "dns": [],
+      "ip": []
+    },
+    "requestedValidity": 49
+  }
+}

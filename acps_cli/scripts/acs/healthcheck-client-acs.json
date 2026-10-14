@@ -1,0 +1,37 @@
+{
+  "aic": "",
+  "active": true,
+  "protocolVersion": "02.01",
+  "lastModifiedTime": "2026-04-18T00:00:00+08:00",
+  "name": "ACPs MQ Auth Service 健康检查客户端",
+  "description": "mq-auth-server 容器健康检查与冒烟测试专用 mTLS 客户端身份。仅用于 /health 和 /ready 探针，不参与任何业务 API 调用。",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "ACPs工作组",
+    "department": "",
+    "url": "https://ioa.pub",
+    "license": "京ICP备2025124884号-4"
+  },
+  "securitySchemes": {
+    "mtls": {
+      "type": "mutualTLS",
+      "description": "mTLS 客户端身份，仅用于向 mq-auth-server 发起健康检查请求"
+    }
+  },
+  "webAppUrl": "",
+  "endPoints": [],
+  "certificate": {
+    "altNames": {
+      "dns": ["mq-auth-server-healthcheck"]
+    },
+    "requestedValidity": 1825
+  },
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": []
+  },
+  "defaultInputModes": [],
+  "defaultOutputModes": [],
+  "skills": []
+}

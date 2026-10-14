@@ -1,0 +1,4 @@
+Usage: acps-cli admin discovery [OPTIONS] COMMAND [ARGS]...
+Discovery administration and DSP control commands.
+dsp       Manage detailed DSP control-plane actions.
+run-sync  Trigger DSP data sync.

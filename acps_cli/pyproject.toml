@@ -1,0 +1,157 @@
+[project]
+name = "acps-cli"
+version = "2.1.0"
+description = "ACPs 统一命令行工具集"
+readme = "README.md"
+license = "MulanPSL-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "python-dotenv>=1.0",
+    "cryptography>=40.0",
+    "httpx>=0.28",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.scripts]
+acps-cli = "acps_cli.main:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "responses>=0.25",
+    "pre-commit>=4.0",
+    "bandit>=1.7",
+    "commitizen>=3.30",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["acps_cli"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "N",
+    "UP",
+    "B",
+    "S",
+    "A",
+    "C4",
+    "DTZ",
+    "T20",
+    "RET",
+    "SIM",
+    "TCH",
+    "PTH",
+    "RUF",
+]
+ignore = [
+    "S101",
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    "B008",
+    "TC001",
+    "TC002",
+    "TC003",
+    "S104",
+    "T201",
+    "UP007",  # X | Y requires Python 3.10+ runtime
+]
+
+[tool.ruff.lint.per-file-ignores]
+"acps_cli/*" = [
+    "PTH100",
+    "PTH101",
+    "PTH103",
+    "PTH110",
+    "PTH118",
+    "PTH120",
+    "PTH121",
+    "PTH123",
+    "S603",
+    "S607",
+]
+"tests/*" = [
+    "S101",
+    "S105",
+    "S106",
+    "S107",
+    "S311",
+    "F841",
+    "PTH103",
+    "PTH110",
+    "PTH112",
+    "PTH116",
+    "PTH123",
+    "PTH202",
+    "RUF012",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.bandit]
+# B101: assert 在本项目 CLI 代码中用于内部不变量断言，属于有意设计
+# B303: SHA1 是 OCSP 协议规范要求，不可替换
+# B106/B107: 参数名 default_token_name 被误判为硬编码密码，实际为 token 文件名
+skips = ["B101", "B303", "B106", "B107"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+
+# TODO: 以下模块存在大量历史欠账（缺少类型注解），待后续补全
+# 已将其 strict 覆盖为 false，避免阻塞新代码的类型检查
+[[tool.mypy.overrides]]
+module = "acps_cli.ca.acme"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = [
+    "acps_cli.ca.commands",
+    "acps_cli.ca.utils",
+    "acps_cli.ca.keys",
+    "acps_cli.discovery.commands",
+]
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+disallow_any_generics = false
+warn_return_any = false
+
+[[tool.mypy.overrides]]
+module = "acps_cli.registry.client"
+warn_return_any = false
+
+# TODO: 测试文件中存在历史欠账（缺少类型注解），待后续补全
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["unit: 单元测试", "integration: 集成测试", "e2e: 端到端测试"]
+addopts = "--strict-markers -ra"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "pep621"
+version_scheme = "semver"
+tag_format = "$version"
+update_changelog_on_bump = true

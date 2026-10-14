@@ -1,0 +1,70 @@
+# ============ 隐私 / 版权（绝不入库）============
+# 平台证书
+*.pem
+*.key
+*.crt
+*.p12
+acps_cli/certs/
+acps_cli/keyfiles/
+acps_cli/.acps-cli/
+acps_cli/bootstrap-artifacts/
+
+# EAB
+eab.json
+*_eab.json
+test_eab*.json
+
+# 模型权重
+*.caffemodel
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.onnx
+*.pb
+*.bin
+partners/*/server-api/checkpoints/
+partners/*/server-api/weights/
+partners/*/server-api/code/config/*.pth
+
+# 训练统计量
+*.npy
+train_224_mean.npy
+
+# 医疗影像（绝不绝不）
+*.svs
+*.ndpi
+*.mrxs
+*.wsi
+test_batch_images/
+test_data/
+samples/
+demo_data/
+code/dataset/
+code/input/
+
+# ============ 运行时产物 ============
+upload/
+wsi-result/
+logs/
+pids/
+tmp/
+*.log
+**/tmp/
+**/output/
+**/bootstrap-artifacts/
+
+# ============ 环境 / 依赖 ============
+.env
+*.env
+!env.example
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# ============ 备份文件 ============
+*.bck
+*.bak
+*.orig
