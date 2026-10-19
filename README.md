@@ -27,7 +27,7 @@ git clone https://github.com/LemonWei111/cancer-demo.git ~/cancer-demo && cd ~/c
 # 2. 一键部署（建 conda 环境、建目录、生成 .env、装依赖）
 bash deploy.sh
 
-# 3. 填 API Key + 平台证书
+# 3. 填 API Key + 平台证书（我们使用[梧桐平台](https://wt.ioa.pub/registry/#/login)注册智能体身份码，您需要自己填写每个子智能体的acs.json，注册拿到AIC后使用scripts/ask_certs.sh申请证书）
 nano leader-agent/server-api/.env
 ```
 
