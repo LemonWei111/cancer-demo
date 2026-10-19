@@ -22,7 +22,7 @@
 
 ```bash
 # 1. 拉代码
-git clone <仓库地址> ~/cancer-demo && cd ~/cancer-demo
+git clone https://github.com/LemonWei111/cancer-demo.git ~/cancer-demo && cd ~/cancer-demo
 
 # 2. 一键部署（建 conda 环境、建目录、生成 .env、装依赖）
 bash deploy.sh
